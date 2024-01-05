@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "UserDetails")
-@JsonIgnoreProperties({"id", "username", "password", "persistent"})
+@JsonIgnoreProperties({"id",  "persistent"})
 public class UserModel extends PanacheEntity {
     private String name;
     private Long phoneNo;

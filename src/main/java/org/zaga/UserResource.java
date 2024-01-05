@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Random;
 
+import org.jboss.resteasy.reactive.RestResponse;
+
 import io.vertx.mutiny.ext.auth.User;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -53,8 +55,10 @@ public class UserResource {
         newUser.setPassword(password);
 
         UserModel createdUser = userService.createUser(newUser);
+        System.out.println("----created user-- " + createdUser);
 
-            return Response.status(Response.Status.CREATED).entity(createdUser).build();
+        return Response.status(Response.Status.CREATED).entity(createdUser).build();
+        // return userService.createUser(newUser);
     }
 
     private String generateUsername(String name) {
