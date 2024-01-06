@@ -7,4 +7,5 @@ public interface UserService {
     UserModel getUserByEmail(String companyEmail);
     UserModel updatUser(String companyEmail, UserModel user);
     void deleteUser(String companyEmail);
+    Boolean canCreate(UserModel userModel);
 }

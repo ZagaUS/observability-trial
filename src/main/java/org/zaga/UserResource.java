@@ -2,6 +2,7 @@ package org.zaga;
 
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Random;
@@ -38,9 +39,11 @@ public class UserResource {
     @Transactional
     public Response createUser(UserModel user){
 
+        try{
         String username = generateUsername(user.getName());
         String password = generateRandomPassword();
-
+        LocalDate todayDate = LocalDate.now();
+        LocalDate expiryDate = todayDate.plusDays(7);
 
         UserModel newUser = new UserModel();
         newUser.setName(user.getName());
@@ -49,7 +52,11 @@ public class UserResource {
         // newUser.setAddress(user.getAddress());
         newUser.setCompanyEmail(user.getCompanyEmail());
         newUser.setCompanyName(user.getCompanyName());
-
+        newUser.setDepartment(user.getDepartment());
+        newUser.setExpiryDate(expiryDate);
+        newUser.setRole(user.getRole());
+        newUser.setTodayDate(todayDate);
+        newUser.setWorkPhone(user.getWorkPhone());
 
         newUser.setUsername(username);
         newUser.setPassword(password);
@@ -58,8 +65,14 @@ public class UserResource {
         System.out.println("----created user-- " + createdUser);
 
         return Response.status(Response.Status.CREATED).entity(createdUser).build();
+          
+        }
+            catch (Exception e){
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("User Already Existed").build();
+            }
+        }
         // return userService.createUser(newUser);
-    }
+    
 
     private String generateUsername(String name) {
 

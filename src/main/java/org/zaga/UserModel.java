@@ -1,5 +1,7 @@
 package org.zaga;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -21,8 +23,14 @@ public class UserModel extends PanacheEntity {
     private String companyEmail;
     private String companyName;
     private String location;
+    private String role;
+    private String department;
+    private Long workPhone;
     // private String address;
     private String username;
     private String password;
+    private LocalDate todayDate;
+    private LocalDate expiryDate;
+
 }
 
